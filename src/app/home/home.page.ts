@@ -12,11 +12,15 @@ import { FormsModule } from '@angular/forms';
 export class HomePage {
   constructor() {}
   newTask: string = '';
-  tasks: string[] = [];
+  tasks: { text: string; done: boolean }[] = [];
 
   addTask() {
     if (this.newTask.trim() !== '') {
-      this.tasks.push(this.newTask);
+      this.tasks.push({
+        text: this.newTask,
+        done: false
+      });
+
       this.newTask = '';
     }
   }
