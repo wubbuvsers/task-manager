@@ -1,12 +1,23 @@
 import { Component } from '@angular/core';
-import { IonHeader, IonToolbar, IonTitle, IonContent } from '@ionic/angular/standalone';
+import { CommonModule } from '@angular/common';
+import { IonicModule } from '@ionic/angular';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonHeader, IonToolbar, IonTitle, IonContent],
+  imports: [CommonModule, IonicModule, FormsModule],
 })
 export class HomePage {
   constructor() {}
+  newTask: string = '';
+  tasks: string[] = [];
+
+  addTask() {
+    if (this.newTask.trim() !== '') {
+      this.tasks.push(this.newTask);
+      this.newTask = '';
+    }
+  }
 }
