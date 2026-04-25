@@ -28,4 +28,15 @@ export class HomePage {
   deleteTask(index: number) {
     this.tasks.splice(index, 1);
   }
+
+  editTask(index: number) {
+    const updatedTask = prompt(
+      "Edit your task:",
+      this.tasks[index].text
+    );
+
+    if (updatedTask !== null && updatedTask.trim() !== '') {
+      this.tasks[index].text = updatedTask.trim();
+    }
+  } 
 }
