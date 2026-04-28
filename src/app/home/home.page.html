@@ -1,4 +1,7 @@
 <ion-header>
+  <ion-buttons slot="start">
+    <ion-menu-button></ion-menu-button>
+  </ion-buttons>
   <ion-toolbar color="primary">
     <ion-title>{{ texts[language].title }}</ion-title>
   </ion-toolbar>
@@ -15,10 +18,6 @@
     </ion-input>
   </ion-item>
 
-  <ion-button (click)="addTask()">
-    {{ texts[language].add }}
-  </ion-button>
-
   <ion-item *ngFor="let task of tasks; let i = index">
 
     <ion-checkbox slot="start" [(ngModel)]="task.done"></ion-checkbox>
@@ -34,7 +33,12 @@
     <ion-button slot="end" color="danger" (click)="deleteTask(i)">
       {{ texts[language].delete }}
     </ion-button>
-
   </ion-item>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addTask()">
+      +
+    </ion-fab-button>
+  </ion-fab>
 
 </ion-content>

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, AlertController, ToastController } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -10,7 +10,18 @@ import { FormsModule } from '@angular/forms';
   imports: [CommonModule, IonicModule, FormsModule],
 })
 export class HomePage {
-  constructor() {}
+  constructor(private toastController: ToastController, private alertController: AlertController) {}
+  async showToast(message: string) {
+    const toast = await this.toastController.create({
+      message: message,
+      duration: 1500,
+      position: 'bottom'
+    });
+
+    await toast.present();
+  }
+
+
   newTask: string = '';
   tasks: { text: string; done: boolean }[] = [];
 
@@ -22,11 +33,30 @@ export class HomePage {
       });
 
       this.newTask = '';
+      this.showToast('Task added');
     }
   }
 
-  deleteTask(index: number) {
-    this.tasks.splice(index, 1);
+  async deleteTask(index: number) {
+    const alert = await this.alertController.create({
+      header: 'Confirm',
+      message: 'Delete this task?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Delete',
+          handler: () => {
+            this.tasks.splice(index, 1);
+            this.showToast('Task deleted'); // ✅ TOAST HERE
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   editTask(index: number) {
@@ -37,6 +67,7 @@ export class HomePage {
 
     if (updatedTask !== null && updatedTask.trim() !== '') {
       this.tasks[index].text = updatedTask.trim();
+      this.showToast('Task updated');
     }
   } 
 
