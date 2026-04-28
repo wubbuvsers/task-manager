@@ -39,4 +39,27 @@ export class HomePage {
       this.tasks[index].text = updatedTask.trim();
     }
   } 
+
+  language: string = 'en';
+
+  texts: any = {
+    en: {
+      title: 'Task Manager',
+      placeholder: 'Enter a task',
+      add: 'Add Task',
+      edit: 'Edit',
+      delete: 'Delete'
+    },
+    es: {
+      title: 'Gestor de Tareas',
+      placeholder: 'Escribe una tarea',
+      add: 'Agregar Tarea',
+      edit: 'Editar',
+      delete: 'Eliminar'
+    }
+  };
+
+  switchLanguage(lang: string) {
+    this.language = lang;
+  }
 }

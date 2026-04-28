@@ -1,20 +1,22 @@
 <ion-header>
   <ion-toolbar color="primary">
-    <ion-title>Task Manager</ion-title>
+    <ion-title>{{ texts[language].title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
+  <ion-button size="small" (click)="switchLanguage('en')">EN</ion-button>
+  <ion-button size="small" (click)="switchLanguage('es')">ES</ion-button>
 
   <ion-item>
     <ion-input 
-      [(ngModel)]="newTask" 
-      placeholder="Enter a task">
+      [(ngModel)]="newTask"
+      [placeholder]="texts[language].placeholder">
     </ion-input>
   </ion-item>
 
-  <ion-button expand="full" (click)="addTask()">
-    Add Task
+  <ion-button (click)="addTask()">
+    {{ texts[language].add }}
   </ion-button>
 
   <ion-item *ngFor="let task of tasks; let i = index">
@@ -25,14 +27,12 @@
       {{ task.text }}
     </span>
 
-    <!-- EDIT BUTTON -->
     <ion-button slot="end" color="warning" (click)="editTask(i)">
-      Edit
+      {{ texts[language].edit }}
     </ion-button>
 
-    <!-- DELETE BUTTON -->
     <ion-button slot="end" color="danger" (click)="deleteTask(i)">
-      Delete
+      {{ texts[language].delete }}
     </ion-button>
 
   </ion-item>
