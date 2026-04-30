@@ -15,3 +15,11 @@ Installation:
 
 this opens the app at:
     http://localhost:8100
+
+To do unit testing:
+    ng test
+    
+For end to end testing, start the app and run:
+    npx cypress open
+Then click on the test file:
+    task-manager.cy.ts
